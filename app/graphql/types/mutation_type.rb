@@ -2,11 +2,13 @@
 
 module Types
   class MutationType < Types::BaseObject
-    # TODO: remove me
-    field :test_field, String, null: false,
-      description: "An example field added by the generator"
-    def test_field
-      "Hello World"
+    field :createUser, Types::UserType, null: false,
+      description: "Creates a new user." do
+        argument :input, Types::UserInputType, required: true
+      end
+
+    def createUser(input:)
+      User.create(name: input[:name], email: input[:email])
     end
   end
 end

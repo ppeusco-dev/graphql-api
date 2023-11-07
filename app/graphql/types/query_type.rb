@@ -18,14 +18,34 @@ module Types
       ids.map { |id| context.schema.object_from_id(id, context) }
     end
 
-    # Add root-level fields here.
-    # They will be entry points for queries on your schema.
+    field :users, [Types::UserType], null: false,
+      description: "Returns a list of all users."
 
-    # TODO: remove me
-    field :test_field, String, null: false,
-      description: "An example field added by the generator"
-    def test_field
-      "Hello World!"
+    def users
+      User.all
+    end
+
+    field :user, Types::UserType, null: false,
+      description: "Returns a user by ID." do
+        argument :id, ID, required: true
+      end
+
+    def user(id:)
+      User.find(id)
+    end
+
+    field :posts_with_comments, [Types::PostType], null: false,
+      description: "Returns a list of all posts with their comments."
+
+    def posts_with_comments
+      Post.includes(:comments).all
+    end
+
+    field :users_with_posts_and_comments, [Types::UserType], null: false,
+      description: "Returns a list of all users with their posts and comments."
+
+    def users_with_posts_and_comments
+      User.includes(posts: :comments).all
     end
   end
 end
