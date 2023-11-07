@@ -1,24 +1,47 @@
-# README
+# GraphQL API con Ruby on Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Este es un ejemplo de una aplicación Ruby on Rails con GraphQL. En esta aplicación, se utilizó GraphQL para crear consultas y mutaciones para interactuar con una base de datos de usuarios.
 
-Things you may want to cover:
+## Instalación
 
-* Ruby version
+1. Clona este repositorio en tu máquina local.
+2. Ejecuta `bundle install` para instalar las gemas necesarias.
+3. Ejecuta `rails db:migrate` para crear las tablas de la base de datos.
+4. Ejecuta `rails server` para iniciar el servidor.
 
-* System dependencies
+## Uso
 
-* Configuration
+Para utilizar esta aplicación, puedes utilizar una herramienta como Postman para enviar consultas y mutaciones GraphQL al servidor. Aquí te proporciono algunos ejemplos de consultas y mutaciones que puedes utilizar:
 
-* Database creation
+### Consultas
 
-* Database initialization
+Para obtener una lista de todos los usuarios en la base de datos, utiliza la siguiente consulta:
 
-* How to run the test suite
+### Consultas
 
-* Services (job queues, cache servers, search engines, etc.)
+Para obtener una lista de todos los usuarios en la base de datos, utiliza la siguiente consulta:
 
-* Deployment instructions
+graphql
+query {
+  users {
+    id
+    name
+    email
+  }
+}
 
-* ...
+### Mutaciones
+
+Para crear un nuevo usuario en la base de datos, utiliza la siguiente mutación:
+
+graphql
+mutation {
+  createUser(input: { name: "John Doe", email: "john.doe@example.com" }) {
+    id
+    name
+    email
+  }
+}
+
+
+
